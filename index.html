@@ -6,7 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="text"></div>
+    <div class="text">
+     
+    </div>
+    <img src="./YoutubeLive.jpg">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
@@ -34,11 +37,26 @@
     </script>
 
     <style>
+      body{
+        margin: 0;
+        padding: 0;
+      }
       div.text {
-        background-image: url("./YoutubeLive.jpg");
-        background-size: cover;
+        position: absolute;
+        top: 35%;
+        left: 50%;
         text-align: center;
-        padding: 130px;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        font-size: 30px;
+        font-family:sans-serif;
+      }
+
+      img{
+        position: absolute;
+        width: 100%;
+        height: auto;
+        
       }
     </style>
   </body>
