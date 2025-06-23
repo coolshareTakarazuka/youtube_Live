@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="text"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <!-- PapaParse を読み込む -->
+
+    <script>
+      fetch(
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjCG6jjUe3f5Ik0ntU6hhMJ4kx2LYt-H0s7gww6wy7C3BDP-NqgmnHcQoGnRzA3U6axwSD1Fe-HYVV/pub?gid=0&single=true&output=csv"
+      )
+        .then((response) => response.text())
+        .then((csvText) => {
+          const parsedData = Papa.parse(csvText, { header: true });
+          const storeData = parsedData.data;
+
+          // A2セルの値（spot2列の1行目の値）を取得
+          const no = storeData[0]?.no || "";
+          const giftName = storeData[0]?.giftName || "";
+          const giftUrl = storeData[0]?.giftUrl || "";
+          const name = storeData[0]?.name || "";
+
+          // HTMLのpClass2の中身を置き換える
+          const spotText = `<h2>${giftName}</h2><h2>応募ID： No.${no}<br />ニックネーム： ${name} 様</h2>`;
+          document.querySelector(".text").innerHTML = spotText;
+        });
+    </script>
+
+    <style>
+      div.text {
+        background-image: url("./YoutubeLive.jpg");
+        background-size: cover;
+        text-align: center;
+        padding: 130px;
+      }
+    </style>
+  </body>
+</html>
