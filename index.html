@@ -6,10 +6,8 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="text">
-     
-    </div>
-    <img src="./YoutubeLive.jpg">
+    <div class="text"></div>
+    <img class="YoutubeLive" src="./YoutubeLive.jpg" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
@@ -29,15 +27,16 @@
           const giftName = storeData[0]?.giftName || "";
           const giftUrl = storeData[0]?.giftUrl || "";
           const name = storeData[0]?.name || "";
+          const people = storeData[0]?.people || "";
 
           // HTMLのpClass2の中身を置き換える
-          const spotText = `<h2>${giftName}</h2><h2>応募ID： No.${no}<br />ニックネーム： ${name} 様</h2>`;
+          const spotText = `<img class="giftImg" src="${giftUrl}"><h2>${giftName}<br>${people}人目</h2><h2>応募ID： No.${no}<br />ニックネーム： ${name} 様</h2>`;
           document.querySelector(".text").innerHTML = spotText;
         });
     </script>
 
     <style>
-      body{
+      body {
         margin: 0;
         padding: 0;
       }
@@ -49,14 +48,16 @@
         transform: translate(-50%, -50%);
         z-index: 1;
         font-size: 30px;
-        font-family:sans-serif;
+        font-family: sans-serif;
       }
 
-      img{
+      img.giftImg {
+        width: 50%;
+      }
+      img.YoutubeLive {
         position: absolute;
         width: auto;
         height: 100%;
-        
       }
     </style>
   </body>
