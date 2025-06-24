@@ -18,8 +18,7 @@
 
       function createCsv() {
         fetch(
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjCG6jjUe3f5Ik0ntU6hhMJ4kx2LYt-H0s7gww6wy7C3BDP-NqgmnHcQoGnRzA3U6axwSD1Fe-HYVV/pub?gid=0&single=true&output=csv&t=" +
-            Date.now()
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjCG6jjUe3f5Ik0ntU6hhMJ4kx2LYt-H0s7gww6wy7C3BDP-NqgmnHcQoGnRzA3U6axwSD1Fe-HYVV/pub?gid=0&single=true&output=csv&t=" 
         )
           .then((response) => response.text())
           .then((csvText) => {
@@ -40,10 +39,10 @@
             console.log(key);
             if (beforeText !== key) {
               document.querySelector(".text").innerHTML = spotText;
-              // ← ここも key に変える
+              beforeText = key;
             }
 
-            beforeText = key;
+            
             console.log(beforeText);
           });
       }
