@@ -15,46 +15,42 @@
 
     <script>
       let beforeText = "";
-      
-      function createCsv(){
-        
+
+      function createCsv() {
         fetch(
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjCG6jjUe3f5Ik0ntU6hhMJ4kx2LYt-H0s7gww6wy7C3BDP-NqgmnHcQoGnRzA3U6axwSD1Fe-HYVV/pub?gid=0&single=true&output=csv&t=" + Date.now())
-    
-        .then((response) => response.text())
-        .then((csvText) => {
-          const parsedData = Papa.parse(csvText, { header: true });
-          const storeData = parsedData.data;
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjCG6jjUe3f5Ik0ntU6hhMJ4kx2LYt-H0s7gww6wy7C3BDP-NqgmnHcQoGnRzA3U6axwSD1Fe-HYVV/pub?gid=0&single=true&output=csv&t=" +
+            Date.now()
+        )
+          .then((response) => response.text())
+          .then((csvText) => {
+            const parsedData = Papa.parse(csvText, { header: true });
+            const storeData = parsedData.data;
 
-          // A2セルの値（spot2列の1行目の値）を取得
-          const no = storeData[0]?.no || "";
-          const giftName = storeData[0]?.giftName || "";
-          const giftUrl = storeData[0]?.giftUrl || "";
-          const name = storeData[0]?.name || "";
-          const people = storeData[0]?.people || "";
+            // A2セルの値（spot2列の1行目の値）を取得
+            
+            const giftName = storeData[0]?.giftName || "";
+            const no = storeData[0]?.no || "";
+            const giftUrl = storeData[0]?.giftUrl || "";
+            const name = storeData[0]?.name || "";
+            const people = storeData[0]?.people || "";
 
-          // HTMLのpClass2の中身を置き換える
-          const spotText = `<img class="giftImg" src="${giftUrl}"><h2>${giftName}<br>${people}人目</h2><h2>応募ID： No.${no}<br />ニックネーム： ${name} 様</h2>`;
-          const key = `${no}-${giftName}-${giftUrl}-${name}-${people}`;
+            // HTMLのpClass2の中身を置き換える
+            const spotText = `<img class="giftImg" src="${giftUrl}"><h2>${giftName}<br>${people}人目</h2><h2>応募ID： No.${no}<br />ニックネーム： ${name} 様</h2>`;
+            const key = `${giftName}-${no}-${giftUrl}-${name}-${people}`;
+            console.log(key);
+            if (beforeText !== key) {
+              document.querySelector(".text").innerHTML = spotText;
+              // ← ここも key に変える
+            }
 
-          
-          
-
-          if (beforeText !== key) {
-          document.querySelector(".text").innerHTML = spotText;
-           // ← ここも key に変える
-          }
-          
-          beforeText = key;
-          console.log(beforeText);
-          
-        });
+            beforeText = key;
+            console.log(beforeText);
+          });
       }
 
       createCsv();
 
-      setInterval(createCsv,5000);
-
+      setInterval(createCsv, 5000);
     </script>
 
     <style>
