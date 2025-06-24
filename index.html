@@ -18,7 +18,7 @@
 
       function createCsv() {
         fetch(
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjCG6jjUe3f5Ik0ntU6hhMJ4kx2LYt-H0s7gww6wy7C3BDP-NqgmnHcQoGnRzA3U6axwSD1Fe-HYVV/pub?gid=0&single=true&output=csv&t=" 
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjCG6jjUe3f5Ik0ntU6hhMJ4kx2LYt-H0s7gww6wy7C3BDP-NqgmnHcQoGnRzA3U6axwSD1Fe-HYVV/pub?gid=0&single=true&output=csv" 
         )
           .then((response) => response.text())
           .then((csvText) => {
@@ -49,7 +49,7 @@
 
       createCsv();
 
-      setInterval(createCsv, 5000);
+      setInterval(createCsv, 1000);
     </script>
 
     <style>
