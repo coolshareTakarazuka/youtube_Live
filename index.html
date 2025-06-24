@@ -14,9 +14,13 @@
     <!-- PapaParse を読み込む -->
 
     <script>
-      fetch(
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjCG6jjUe3f5Ik0ntU6hhMJ4kx2LYt-H0s7gww6wy7C3BDP-NqgmnHcQoGnRzA3U6axwSD1Fe-HYVV/pub?gid=0&single=true&output=csv"
-      )
+      let beforeText = "";
+      
+      function createCsv(){
+        
+        fetch(
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjCG6jjUe3f5Ik0ntU6hhMJ4kx2LYt-H0s7gww6wy7C3BDP-NqgmnHcQoGnRzA3U6axwSD1Fe-HYVV/pub?gid=0&single=true&output=csv&t=" + Date.now())
+    
         .then((response) => response.text())
         .then((csvText) => {
           const parsedData = Papa.parse(csvText, { header: true });
@@ -31,8 +35,26 @@
 
           // HTMLのpClass2の中身を置き換える
           const spotText = `<img class="giftImg" src="${giftUrl}"><h2>${giftName}<br>${people}人目</h2><h2>応募ID： No.${no}<br />ニックネーム： ${name} 様</h2>`;
+          const key = `${no}-${giftName}-${giftUrl}-${name}-${people}`;
+
+          
+          
+
+          if (beforeText !== key) {
           document.querySelector(".text").innerHTML = spotText;
+           // ← ここも key に変える
+          }
+          
+          beforeText = key;
+          console.log(beforeText);
+          
         });
+      }
+
+      createCsv();
+
+      setInterval(createCsv,5000);
+
     </script>
 
     <style>
